@@ -3,6 +3,7 @@ package back_spring_inso2.entities;
 import java.util.Date;
 
 import back_spring_inso2.enums.enums.Jerarquia;
+import back_spring_inso2.enums.enums.Rol;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -57,8 +58,9 @@ public class UserEntity {
     @Column(nullable = false, length = 255)
     private Integer  dni;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 255)
-    private String rol_usuario;
+    private Rol rol_usuario;
 
     //relacion uno a uno con Rol
     @OneToOne(mappedBy = "usuario")

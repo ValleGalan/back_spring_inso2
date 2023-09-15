@@ -1,5 +1,6 @@
 package back_spring_inso2.controllers;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import back_spring_inso2.entities.UserEntity;
 import back_spring_inso2.models.requests.UserRegisterRequestModel;
+import back_spring_inso2.models.response.UserRest;
 import back_spring_inso2.services.UserService;
 import jakarta.validation.Valid; //fijarme el valid que no anda capaz otra version de Hibernate Validator Engine
 
@@ -24,10 +26,11 @@ public class UserController {
 
     //POST, GET, DELETE, PUT, PATH
     @PostMapping()  
-    public UserEntity createUser( @RequestBody @Valid UserRegisterRequestModel userModel){
+    public UserRest createUser( @RequestBody @Valid UserRegisterRequestModel userModel){
         
         UserEntity user= userService.createUser(userModel);
-
-        return user;
+        UserRest userRest = new UserRest();
+        BeanUtils.copyProperties(user, userRest);
+        return userRest;
     }
 }

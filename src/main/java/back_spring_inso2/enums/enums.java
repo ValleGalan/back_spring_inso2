@@ -33,5 +33,9 @@ public class enums {
         B1_ADOLESCENTE_ACTO_SEXUAL,
         B2_ADOLESCENTE_EXPOSICIÓN_LASCIVA
     }
-    
+
+    public enum Rol {
+        ADMINISTRADOR,
+        SECRETARIO
+    }
 }
