@@ -20,7 +20,7 @@ public class UserRegisterRequestModel {
     private Jerarquia jerarquia;
     private Estado_Usuario estado;
     private String legajo;
-    private Integer num_contacto;
+    private Long  num_contacto;
     private String domicilio; 
     @NotEmpty
     @Email
@@ -29,7 +29,7 @@ public class UserRegisterRequestModel {
     @Size(min= 8, max = 40)
     private String password;
     private Date fecha_nacimiento;
-    private Integer dni;
+    private Long  dni;
     private String rol_usuario;
     private RolRequestModel roles;
     private ReportRequestModel reportes;

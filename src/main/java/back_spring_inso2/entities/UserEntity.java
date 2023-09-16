@@ -45,7 +45,7 @@ public class UserEntity {
     private String legajo;
 
     @Column(nullable = true)
-    private Integer  num_contacto;
+    private Long   num_contacto;
 
     @Column(nullable = true, length = 255)
     private String domicilio;
@@ -61,7 +61,7 @@ public class UserEntity {
     private Date fecha_nacimiento;
 
     @Column(nullable = false)
-    private Integer  dni;
+    private Long   dni;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true)
