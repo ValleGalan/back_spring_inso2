@@ -47,7 +47,7 @@ public class UserEntity {
     @Column(nullable = true)
     private Integer  num_contacto;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = true, length = 255)
     private String domicilio;
 
     @Column(nullable = false, length = 255)
@@ -60,11 +60,11 @@ public class UserEntity {
     @Temporal(TemporalType.DATE)
     private Date fecha_nacimiento;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private Integer  dni;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 255)
+    @Column(nullable = true)
     private Rol rol_usuario;
 
     //relacion uno a uno con Rol

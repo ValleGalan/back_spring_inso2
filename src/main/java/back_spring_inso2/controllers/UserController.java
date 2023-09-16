@@ -20,7 +20,7 @@ import back_spring_inso2.services.UserService;
 import jakarta.validation.Valid; //fijarme el valid que no anda capaz otra version de Hibernate Validator Engine
 
 @RestController
-@RequestMapping("/users/")
+@RequestMapping("/users")
 
 
 public class UserController {
@@ -30,7 +30,7 @@ public class UserController {
     UserService userService;
 
     //POST, GET, DELETE, PUT, PATH
-    @CrossOrigin(origins = "http://localhost:3000")
+   // @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping()  
     public UserRest createUser( @RequestBody @Valid UserRegisterRequestModel userModel){
         
