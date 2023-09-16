@@ -2,6 +2,7 @@ package back_spring_inso2.models.requests;
 
 import java.util.Date;
 
+import back_spring_inso2.enums.enums.Estado_Usuario;
 import back_spring_inso2.enums.enums.Jerarquia;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,9 +18,10 @@ public class UserRegisterRequestModel {
     private String nombre;
     private String apellido;
     private Jerarquia jerarquia;
+    private Estado_Usuario estado;
     private String legajo;
     private Integer num_contacto;
-    private String domicilio;
+    private String domicilio; 
     @NotEmpty
     @Email
     private String correo;

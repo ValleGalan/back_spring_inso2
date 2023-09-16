@@ -2,6 +2,7 @@ package back_spring_inso2.entities;
 
 import java.util.Date;
 
+import back_spring_inso2.enums.enums.Estado_Usuario;
 import back_spring_inso2.enums.enums.Jerarquia;
 import back_spring_inso2.enums.enums.Rol;
 import jakarta.persistence.Column;
@@ -35,6 +36,10 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = true, length = 150) 
     private Jerarquia jerarquia;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = true, length = 250)
+    private Estado_Usuario estado;
 
     @Column(nullable = false, length = 255)
     private String legajo;

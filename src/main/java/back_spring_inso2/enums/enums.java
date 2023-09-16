@@ -38,4 +38,9 @@ public class enums {
         ADMINISTRADOR,
         SECRETARIO
     }
+
+    public enum Estado_Usuario {
+        HABILITADO,
+        DESABILITADO
+    }
 }
