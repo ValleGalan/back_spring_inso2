@@ -1,5 +1,8 @@
 package back_spring_inso2.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,69 +25,80 @@ import jakarta.validation.Valid; //fijarme el valid que no anda capaz otra versi
 @RestController
 @RequestMapping("/users")
 
-
 public class UserController {
 
-    //usamos el servicio
+    // usamos el servicio
     @Autowired
     UserService userService;
 
-    //POST, GET, DELETE, PUT, PATH
-   // @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping()  
-    public UserRest createUser( @RequestBody @Valid UserRegisterRequestModel userModel){
-        
-        UserEntity user= userService.createUser(userModel);
+    // POST, GET, DELETE, PUT, PATH
+    // @CrossOrigin(origins = "http://localhost:3000")
+
+    // crea un usuario
+    @PostMapping()
+    public UserRest createUser(@RequestBody @Valid UserRegisterRequestModel userModel) {
+
+        UserEntity user = userService.createUser(userModel);
         UserRest userRest = new UserRest();
         BeanUtils.copyProperties(user, userRest);
         return userRest;
     }
 
-    
+    // devuelve uno solo
+    @GetMapping("/{userId}")
+    public UserRest getUser(@PathVariable long userId) { // @PathVariable long userId
 
-    /*
-@GetMapping("/{userId}")
-    public UserRest getUser(@PathVariable Long userId) {
-
-    UserEntity user = userService.getUserById(userId);
-    UserRest userRest = new UserRest();
-    BeanUtils.copyProperties(user, userRest);
-    return userRest;
+        UserEntity user = userService.getUserById(userId);
+        UserRest userRest = new UserRest();
+        BeanUtils.copyProperties(user, userRest);
+        return userRest;
     }
 
-     @PutMapping("/{userId}")
+    // Devuelve todo los usuarios
+    @GetMapping("/Allusers")
+    public List<UserRest> getAllUsers() {
+        List<UserEntity> users = userService.getAllUsers();
+        List<UserRest> userRestList = new ArrayList<>();
+        for (UserEntity user : users) {
+            UserRest userRest = new UserRest();
+            BeanUtils.copyProperties(user, userRest);
+            userRestList.add(userRest);
+        }
+        return userRestList;
+    }
+
+    // Actualizar un usuario existente
+    @PutMapping("/{userId}")
     public UserRest updateUser(@PathVariable Long userId, @RequestBody UserRegisterRequestModel userModel) {
-    UserEntity existingUser = userService.getUserById(userId);
-
-    // Verifica si el usuario con userId existe
-    if (existingUser == null) {
-        // Maneja el caso en el que el usuario no existe, por ejemplo, lanza una excepción
-    }
-
-    // Actualiza los campos relevantes del usuario con los valores de userModel
-    // Aquí puedes usar BeanUtils.copyProperties o establecer los campos manualmente
-    existingUser.setNombre(userModel.getNombre());
-    existingUser.setApellido(userModel.getApellido());
-
-    UserEntity updatedUser = userService.updateUser(existingUser);// Guarda los cambios en el usuario
-    UserRest userRest = new UserRest();
-    BeanUtils.copyProperties(updatedUser, userRest);
-    return userRest;
+        UserEntity existingUser = userService.getUserById(userId);
+        if (existingUser == null) {
+        }
+        existingUser.setNombre(userModel.getNombre());
+        existingUser.setApellido(userModel.getApellido());
+        existingUser.setJerarquia(userModel.getJerarquia());
+        existingUser.setEstado(userModel.getEstado());
+        existingUser.setLegajo(userModel.getLegajo());
+        existingUser.setNum_contacto(userModel.getNum_contacto());
+        existingUser.setDomicilio(userModel.getDomicilio());
+        existingUser.setCorreo(userModel.getCorreo());
+        existingUser.setPassword(userModel.getPassword());
+        existingUser.setFecha_nacimiento(userModel.getFecha_nacimiento());
+        existingUser.setDni(userModel.getDni());
+        existingUser.setRol_usuario(userModel.getRol_usuario());
+        UserEntity updatedUser = userService.updateUser(existingUser);// Guarda loscambios en el usuario
+        UserRest userRest = new UserRest();
+        BeanUtils.copyProperties(updatedUser, userRest);
+        return userRest;
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
-    UserEntity existingUser = userService.getUserById(userId);
+    public ResponseEntity<Void> deleteUser(@PathVariable long userId) {
+        UserEntity existingUser = userService.getUserById(userId);
+        if (existingUser == null) {
 
-    if (existingUser == null) {
-        // Maneja el caso en el que el usuario no existe, por ejemplo, lanza una excepción
+        }
+        userService.deleteUser(existingUser);
+        return ResponseEntity.noContent().build();
     }
-
-    userService.deleteUser(existingUser);
-    return ResponseEntity.noContent().build();
-}
-     */
-
-
 
 }

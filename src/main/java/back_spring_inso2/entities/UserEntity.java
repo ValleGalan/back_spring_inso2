@@ -45,7 +45,7 @@ public class UserEntity {
     private String legajo;
 
     @Column(nullable = true)
-    private Long   num_contacto;
+    private long   num_contacto;
 
     @Column(nullable = true, length = 255)
     private String domicilio;
@@ -61,10 +61,10 @@ public class UserEntity {
     private Date fecha_nacimiento;
 
     @Column(nullable = false)
-    private Long   dni;
+    private long   dni;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
+    @Column(nullable = true, length = 255)
     private Rol rol_usuario;
 
     //relacion uno a uno con Rol

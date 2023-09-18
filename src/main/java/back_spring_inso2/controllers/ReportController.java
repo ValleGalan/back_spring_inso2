@@ -1,8 +1,16 @@
 package back_spring_inso2.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +19,6 @@ import back_spring_inso2.entities.ReportEntity;
 import back_spring_inso2.models.requests.ReportRequestModel;
 import back_spring_inso2.models.response.ReportRest;
 import back_spring_inso2.services.ReportService;
-import back_spring_inso2.services.UserService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -28,9 +35,63 @@ public class ReportController {
         ReportEntity report = reportService.createReport(reportModel);
         ReportRest reportRest = new ReportRest();
         BeanUtils.copyProperties(report, reportRest);
-        
+        return reportRest;
+    }
+// devuelve uno solo
+    @GetMapping("/{reportId}")
+    public ReportRest getReportById(@PathVariable long reportId) { // @PathVariable long userId
+
+        ReportEntity report = reportService.getReportById(reportId);
+        ReportRest reportRest = new ReportRest();
+        BeanUtils.copyProperties(report, reportRest);
+        return reportRest;
+    }
+    // Devuelve todo los repirtes
+    @GetMapping("/Allreports")
+    public List<ReportRest> getAllReports() {
+        List<ReportEntity> reports = reportService.getAllReports();
+        List<ReportRest> reportRestList = new ArrayList<>();
+        for (ReportEntity report : reports) {
+            ReportRest reportRest = new ReportRest();
+            BeanUtils.copyProperties(report, reportRest);
+            reportRestList.add(reportRest);
+        }
+        return reportRestList;
+    }
+
+ // Actualizar un usuario existente
+    @PutMapping("/{reportId}")
+    public ReportRest updateReport(@PathVariable Long reportId, @RequestBody ReportRequestModel reportModel) {
+        ReportEntity existingReport = reportService.getReportById(reportId);
+        if (existingReport == null) {
+        }
+        existingReport.setNum_reporte(reportModel.getNum_reporte());
+        existingReport.setPrioridad(reportModel.getPrioridad());
+        existingReport.setCategoria(reportModel.getCategoria());
+        existingReport.setCant_archivo(reportModel.getCant_archivo());
+        existingReport.setUrl(reportModel.getUrl());
+        existingReport.setIp(reportModel.getIp());
+        existingReport.setTelefono(reportModel.getTelefono());
+        existingReport.setCorreo(reportModel.getCorreo());
+        existingReport.setNombre_user(reportModel.getNombre_user());
+        existingReport.setEstado(reportModel.getEstado());
+        existingReport.setInvestigador(reportModel.getInvestigador());
+        ReportEntity updatedReport = reportService.updateReport(existingReport);// Guarda loscambios en el usuario
+        ReportRest reportRest = new ReportRest();
+        BeanUtils.copyProperties(updatedReport, reportRest);
         return reportRest;
     }
 
 
+
+
+    @DeleteMapping("/{reportId}")
+    public ResponseEntity<Void> deleteReport(@PathVariable long reportId) {
+        ReportEntity existingReport = reportService.getReportById(reportId);
+        if (existingReport == null) {
+
+        }
+        reportService.deleteReport(existingReport);
+        return ResponseEntity.noContent().build();
+    }
 }

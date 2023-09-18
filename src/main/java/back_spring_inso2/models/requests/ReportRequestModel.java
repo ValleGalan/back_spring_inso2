@@ -10,19 +10,16 @@ import lombok.Data;
 @Data
 public class ReportRequestModel {
 
-    //private long numReporte;
+    private long num_reporte;
     private Prioridad prioridad;
     private Categoria categoria;
-    private Integer cantArchivo;
+    private long cant_archivo;
     private String url;
     private String ip;
-    private Integer telefono;
+    private long telefono;
     private String correo;
-    private String nombreUser;
+    private String nombre_user;
     private Estado estado;
     private String investigador;
-    private AsociacionReportRequestModel asociacion;
-    private List<InformeRequestModel> informes;
-    private UserRegisterRequestModel user;
-    private List<UbicacionRequestModel> ubicaciones;
+
 }

@@ -27,10 +27,10 @@ public class ReportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long num_reporte;
+    private long id;
 
-    //@Column(nullable = true, length = 255)
-    //private String prioridad;
+    @Column(nullable = false)
+    private long num_reporte;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = true, length = 200) 
@@ -43,7 +43,7 @@ public class ReportEntity {
     private Categoria categoria;
 
     @Column(nullable = true)
-    private Integer cant_archivo;
+    private long cant_archivo;
 
     @Column(nullable = true, length = 255)
     private String url;
@@ -52,7 +52,7 @@ public class ReportEntity {
     private String ip;
 
     @Column(nullable = true)
-    private Integer telefono;
+    private long telefono;
 
     @Column(nullable = true, length = 255)
     private String correo;
