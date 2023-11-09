@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import back_spring_inso2.entities.ReportEntity;
+import back_spring_inso2.enums.enums.Estado;
 import back_spring_inso2.models.requests.ReportRequestModel;
+import back_spring_inso2.models.response.DomicilioRest;
 import back_spring_inso2.models.response.ReportRest;
 import back_spring_inso2.services.ReportService;
 import jakarta.validation.Valid;
@@ -39,7 +41,7 @@ public class ReportController {
     }
 // devuelve uno solo
     @GetMapping("/{reportId}")
-    public ReportRest getReportById(@PathVariable long reportId) { // @PathVariable long userId
+    public ReportRest getReport(@PathVariable long reportId) { // @PathVariable long userId
 
         ReportEntity report = reportService.getReportById(reportId);
         ReportRest reportRest = new ReportRest();
@@ -61,13 +63,13 @@ public class ReportController {
 
  // Actualizar un usuario existente
     @PutMapping("/{reportId}")
-    public ReportRest updateReport(@PathVariable Long reportId, @RequestBody ReportRequestModel reportModel) {
+    public ReportRest updateReport(@PathVariable long reportId, @RequestBody ReportRequestModel reportModel) {
         ReportEntity existingReport = reportService.getReportById(reportId);
         if (existingReport == null) {
         }
         existingReport.setNum_reporte(reportModel.getNum_reporte());
         existingReport.setPrioridad(reportModel.getPrioridad());
-        existingReport.setCategoria(reportModel.getCategoria());
+        existingReport.setTipo_reporte(reportModel.getTipo_reporte());
         existingReport.setCant_archivo(reportModel.getCant_archivo());
         existingReport.setUrl(reportModel.getUrl());
         existingReport.setIp(reportModel.getIp());
@@ -76,14 +78,12 @@ public class ReportController {
         existingReport.setNombre_user(reportModel.getNombre_user());
         existingReport.setEstado(reportModel.getEstado());
         existingReport.setInvestigador(reportModel.getInvestigador());
+        existingReport.setDomicilio_reporte(reportModel.getDomicilio_reporte());
         ReportEntity updatedReport = reportService.updateReport(existingReport);// Guarda loscambios en el usuario
         ReportRest reportRest = new ReportRest();
         BeanUtils.copyProperties(updatedReport, reportRest);
         return reportRest;
     }
-
-
-
 
     @DeleteMapping("/{reportId}")
     public ResponseEntity<Void> deleteReport(@PathVariable long reportId) {
@@ -94,4 +94,25 @@ public class ReportController {
         reportService.deleteReport(existingReport);
         return ResponseEntity.noContent().build();
     }
+    /* */
+    @GetMapping("/domiciliosHechosEsclarecidos")
+    public List<DomicilioRest> getDomiciliosHechosEsclarecidos() {
+        List<ReportEntity> reports = reportService.getReportsByEstado(Estado.HECHO_ESCLARECIDO);
+        List<DomicilioRest> domicilios = new ArrayList<>();
+
+        for (ReportEntity report : reports) {
+            DomicilioRest domicilioModel = new DomicilioRest();
+            domicilioModel.setNum_reporte(report.getNum_reporte());
+            domicilioModel.setDomicilio_reporte(report.getDomicilio_reporte());
+            domicilioModel.setTipo_reporte(report.getTipo_reporte());
+        // Puedes configurar otros campos según sea necesario
+            domicilios.add(domicilioModel);
+        }
+
+    return domicilios;
+    }
+
+
+
+
 }

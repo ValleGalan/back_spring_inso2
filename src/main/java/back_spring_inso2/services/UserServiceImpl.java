@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
+//import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import back_spring_inso2.entities.UserEntity;
@@ -56,4 +57,8 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(UserEntity user) {
         userRepository.delete(user);
     }
+ 
+  
+
+
 }

@@ -17,7 +17,7 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //incremente en la BD
     private long id;
     
-    @Column(nullable = false, length = 255)
+    @Column( length = 255)
     private String rol;
     //usuario puede tener un único rol y 
     //un rol puede estar asociado a un único usuario

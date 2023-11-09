@@ -7,7 +7,8 @@ import back_spring_inso2.entities.UserEntity;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
+
+    
     //Agregar metodos personalizados
-    
-    
+    UserEntity findByCorreo(String correo);
 }

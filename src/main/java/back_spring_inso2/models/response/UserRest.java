@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class UserRest {
-
+    private long id;
     private String nombre;
     private String apellido;
     private Jerarquia jerarquia;

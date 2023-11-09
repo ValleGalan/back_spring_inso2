@@ -5,6 +5,7 @@ import java.util.List;
 import back_spring_inso2.enums.enums.Categoria;
 import back_spring_inso2.enums.enums.Estado;
 import back_spring_inso2.enums.enums.Prioridad;
+import back_spring_inso2.enums.enums.TipoReporte;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,9 +19,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
-
-@Entity(name = "reporte")
+@Table(name = "reporte")
+@Entity //(name = "reporte")
 @Data
 public class ReportEntity {
     //Modelo de tabla
@@ -29,45 +31,48 @@ public class ReportEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column()
     private long num_reporte;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 200) 
+    @Column( length = 200) 
     private Prioridad prioridad;
 
-    //@Column(nullable = true, length = 255)
+    //@Column( length = 255)
     //private String categoria;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 200) 
-    private Categoria categoria;
+    @Column( length = 200) 
+    private TipoReporte tipo_reporte;
 
     @Column(nullable = true)
     private long cant_archivo;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String url;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String ip;
 
     @Column(nullable = true)
     private long telefono;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String correo;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String nombre_user;
 
-    //@Column(nullable = false, length = 255)
+    //@Column(, length = 255)
     //private String estado;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 200) 
+    @Column( length = 200) 
     private Estado estado;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String investigador;
+
+    @Column(length = 255)
+    private String domicilio_reporte;
     
     
     // Relacion 1:M con asociacion

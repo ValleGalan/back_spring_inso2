@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import back_spring_inso2.entities.ReportEntity;
-import back_spring_inso2.entities.UserEntity;
+import back_spring_inso2.enums.enums.Estado;
 import back_spring_inso2.models.requests.ReportRequestModel;
 import back_spring_inso2.repositories.ReportRepository;
 
@@ -41,15 +41,19 @@ public class ReportServiceImpl implements ReportService{
         return reportList;
     }
     @Override
-    public ReportEntity updateReport(ReportEntity reportEntityEntity) {
-        return reportRepository.save(reportEntityEntity);
+    public ReportEntity updateReport(ReportEntity reportEntity) {
+        System.out.println("reporte : "+reportEntity);
+        return reportRepository.save(reportEntity);
     }
 
     @Override
     public void deleteReport(ReportEntity reportEntity) {
         reportRepository.delete(reportEntity);
     }
-
-
+    /* */
+    @Override
+    public List<ReportEntity> getReportsByEstado(Estado estado) {
+        return reportRepository.findByEstado(estado);
+    }
 
 }

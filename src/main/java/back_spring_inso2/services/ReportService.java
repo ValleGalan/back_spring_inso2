@@ -3,6 +3,7 @@ package back_spring_inso2.services;
 import java.util.List;
 
 import back_spring_inso2.entities.ReportEntity;
+import back_spring_inso2.enums.enums.Estado;
 import back_spring_inso2.models.requests.ReportRequestModel;
 
 public interface ReportService {
@@ -13,9 +14,10 @@ public interface ReportService {
 
     public List<ReportEntity> getAllReports();
 
-
     public ReportEntity updateReport(ReportEntity report);
 
     public void deleteReport(ReportEntity report);
+
+    public List<ReportEntity> getReportsByEstado(Estado estado);
 
 }

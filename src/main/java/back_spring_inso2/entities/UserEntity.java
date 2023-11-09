@@ -25,46 +25,46 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //incremente en la BD
     private long id;
 
-    @Column(nullable = false, length = 255)
+    @Column( length = 255)
     private String nombre;
 
-    @Column(nullable = false, length = 255)
+    @Column( length = 255)
     private String apellido;
 
     //@Column(nullable = true, length = 255)
     //private String jerarquia;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 150) 
+    @Column( length = 150) 
     private Jerarquia jerarquia;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 250)
+    @Column( length = 250)
     private Estado_Usuario estado;
 
-    @Column(nullable = false, length = 255)
+    @Column( length = 255)
     private String legajo;
 
     @Column(nullable = true)
     private long   num_contacto;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String domicilio;
 
-    @Column(nullable = false, length = 255)
+    @Column( length = 255)
     private String correo;
 
-    @Column(nullable = false, length = 255)
+    @Column( length = 255)
     private String password;
 
-    @Column(nullable = false)
+    @Column()
     @Temporal(TemporalType.DATE)
     private Date fecha_nacimiento;
 
-    @Column(nullable = false)
+    @Column()
     private long   dni;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private Rol rol_usuario;
 
     //relacion uno a uno con Rol

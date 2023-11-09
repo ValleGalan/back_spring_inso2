@@ -24,14 +24,14 @@ public class AsociacionReportEntity {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String estado;
 
-    @Column(nullable = false)
+    @Column()
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_creacion;
     
-    @Column(nullable = true)
+    @Column()
     private Integer num_reporte ;
 
     @OneToMany(mappedBy = "asociacion")

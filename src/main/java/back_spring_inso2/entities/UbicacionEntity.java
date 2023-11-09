@@ -17,19 +17,19 @@ public class UbicacionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_mapa;
 
-    @Column(nullable = true, length = 255)
+    @Column(length = 255)
     private String ubicacion;
 
-    @Column(nullable = true, length = 255)
+    @Column(length = 255)
     private String estado;
 
-    @Column(nullable = true, length = 255)
+    @Column(length = 255)
     private String num_report;
 
-    @Column(nullable = true, length = 255)
+    @Column(length = 255)
     private String ip;
 
-    @Column(nullable = true, length = 255)
+    @Column(length = 255)
     private String domicilio;
 
     //relacion 1:M con reporte

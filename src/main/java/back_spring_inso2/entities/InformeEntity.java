@@ -23,16 +23,16 @@ public class InformeEntity {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String autor;
 
-    @Column(nullable = true, length = 255)
+    @Column( length = 255)
     private String archivo;
 
-    //@Column(nullable = true, length = 255)
+    //@Column( length = 255)
     //private String tipo;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true, length = 255) 
+    @Column( length = 255) 
     private TipoReporte tipo_reporte;
 
     //relacion de M:M con reporte

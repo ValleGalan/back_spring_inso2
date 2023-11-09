@@ -10,4 +10,6 @@ import back_spring_inso2.entities.RolEntity;
 
 public interface RolRepository extends CrudRepository<RolEntity, Long> {
     //Agregar metodos personalizados
+    RolEntity findByRol(String rol);
+
 }
